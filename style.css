@@ -1,0 +1,28 @@
+.input { 
+    color: red;
+}
+
+.input > .label { 
+    color:blue; 
+}
+
+.input > .numberinput { 
+    color:green;
+}
+
+.calculated { 
+    color: gray;
+}
+
+.calculated > .label { 
+    color: purple;
+}
+
+.calculated > .value { 
+    color: green; 
+}
+
+.valueinline { 
+    color:red; 
+    display:inline; 
+}
