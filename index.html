@@ -54,7 +54,7 @@
                     $scope.monthlyTotal = "$" + monthlytotal.toFixed(2);
 
                     //reality check.
-                    var grossIncome = $scope.monthlyIncome;
+                    var grossIncome = $scope.yearlyIncome / 12;
                     var monthlyExpensesRetirement = grossIncome - monthlyDeposit;
                     $scope.monthlyExpenses = "$" + monthlyExpensesRetirement.toFixed(2);
                     var difference = monthlytotal - monthlyExpensesRetirement;
@@ -71,46 +71,53 @@
 				$scope.years2retire				  = 20;
                 $scope.savedgrowthrate            = '$__';
                 $scope.monthlySavingGrowthRate    = '$__';
-                $scope.monthlyIncome              = 3000;
+                $scope.yearlyIncome               = 36000;
                 $scope.monthlySavings             = 300;
                 $scope.savedNow                   = 72000;
-                $scope.futureValueSaved           = 45;
-                $scope.futureValueMonthlyContribs = 45;
-                $scope.futureValueEverything      = 45;
+                $scope.futureValueSaved           = '__';
+                $scope.futureValueMonthlyContribs = '__';
+                $scope.futureValueEverything      = '__';
                 $scope.socialsec                  = 400;
-                $scope.monthlyFromSavings         = 45;
-                $scope.monthlyTotal               = 45;
-                $scope.monthlyExpenses            = 45;
-                $scope.differenceField            = 45;
+                $scope.monthlyFromSavings         = '__';
+                $scope.monthlyTotal               = '__';
+                $scope.monthlyExpenses            = '__';
+                $scope.differenceField            = '__';
             });
         </script>
     </head>
     <body ng-app="retireApp" ng-controller="retireCtrl">
 		<div class="content">
-			<div ng-click="calculate()" class="button">calculate</div>
 			<div class="section">
 				<h2>Projections</h2>
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div   class="label">Years to retirement: </div>
-					<input class="numberinput" type="number" ng-model="years">
+					<label class="label">Years to retirement: <br />
+						<input class="numberinput" type="number" ng-model="years" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Return on investment (choose 7%, 8%, 9%, or 10%): </div>
-					<input class="numberinput" type="number" ng-model="roi">
+					<label class="label">Return on investment (choose 7%, 8%, 9%, or 10%): <br />
+						<input class="numberinput" type="number" ng-model="roi" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Inflation rate (chose 2%, 3%, 4%, or 5%): </div>
-					<input class="numberinput" type="number" ng-model="inflation">
+					<label class="label">Inflation rate (chose 2%, 3%, 4%, or 5%): <br />
+						<input class="numberinput" type="number" ng-model="inflation" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
 				<div class="calculated">
-					<div class="label">Savings growth rate: </div>
+					<div class="label">Calculated savings growth rate: </div>
 					<div class="value">{{growthRate}}</div>
 				</div>
-
 
 				<div class="calculated">
 					<div class="label">Value of $1 growing at <div class="valueinline">{{growthRate}}</div>
@@ -129,20 +136,29 @@
 			<div class="section">
 				<h2> Guesses </h2>
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Gross monthly income: </div>
-					<input class="numberinput" type="number" ng-model="monthlyIncome">
+					<label class="label">Gross yearly income: <br />
+					<input class="numberinput" type="number" ng-model="yearlyIncome" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Savings per month: </div>
-					<input class="numberinput" type="number" ng-model="monthlySavings">
+					<label class="label">Savings per month: <br />
+					<input class="numberinput" type="number" ng-model="monthlySavings" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Amount in retirement accounts today: </div>
-					<input class="numberinput" type="number" ng-model="savedNow">
+					<label class="label">Amount in retirement accounts today: <br />
+					<input class="numberinput" type="number" ng-model="savedNow" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 			</div>
 
 			<div class="section">
@@ -150,26 +166,33 @@
 
 				<div class="calculated">
 					<div class="label">Amount in your old savings plan pile</div>
+					<div class="help">(current savings plus interest at time of retirement)</div>
 					<div class="value">{{futureValueSaved}}</div>
 				</div>
 
 				<div class="calculated">
 					<div class="label">Amount in your new savings plan pile</div>
+					<div class="help">(planned savings plus interest at time of retirement)</div>
 					<div class="value">{{futureValueMonthlyContribs}}</div>
 				</div>
 
 				<div class="calculated">
 					<div class="label">Amount in both</div>
+					<div class="help">(total savings)</div>
 					<div class="value">{{futureValueEverything}}</div>
 				</div>
 
+				<div class="chevron"></div>
 				<div class="input">
-					<div class="label">Social Security amount:</div>
-					<input class="numberinput" type="number" ng-model="socialsec">
+					<label class="label">Social Security amount:<br />
+						<input class="numberinput" type="number" ng-model="socialsec" ng-change="calculate()">
+					</label>
 				</div>
+				<br />
 
 				<div class="calculated">
-					<div class="label">Monthly withdrawal from savings (saved amount diviged by 300)</div>
+					<div class="label">Monthly withdrawal from savings</div>
+					<div class="help">(saved amount divided by 300)</div>
 					<div class="value">{{monthlyFromSavings}}</div>
 				</div>
 
@@ -191,7 +214,6 @@
 					<div class="value">{{differenceField}}</div>
 				</div>
 			</div>
-			<div ng-click="calculate()" class="button">calculate</div>
 		</div>
     </body>
 </html>
